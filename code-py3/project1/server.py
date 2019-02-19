@@ -6,12 +6,15 @@ MCAST_GRP = '224.1.1.1'
 host = 'localhost' 
 MAX_BUF = 2048     
 port = 50000 
+MCAST_PORT = 5007
+MULTICAST_TTL = 2
 addr = (host, port)  
 s = socket(AF_INET, SOCK_DGRAM,IPPROTO_UDP) 
-s.bind(addr)                
+# s.bind(addr)                
 topic = dict()    
 list_of_sub = list()
 print ('Broker started ...')
+# s.bind(addr) 
 while True:
   txtin,addr = s.recvfrom(MAX_BUF)
   data_loaded = json.loads(txtin.decode('utf-8'))
@@ -21,9 +24,6 @@ while True:
      break
   if data_loaded[0]=='subscribe':
     if data_loaded[1] not in topic:
-      topic[data_loaded[1]] = ''        #data_loaded[1] is topic_name
-      # client_port = json.dumps({'port':addr[1]})
-      # s.sendto(client_port.encode('utf-8'),addr)
   elif data_loaded[0]=='publish':
     if data_loaded[1] in topic:
       topic[data_loaded[1]] = data_loaded[2]  #data_loaded[1] is topic_name  

@@ -1,15 +1,13 @@
-#!/usr/bin/python           # This is server.py file
+from multiprocessing import Process
 
-import socket               # Import socket module
+def loop_a():
+    while 1:
+        print("a")
 
-s = socket.socket()         # Create a socket object
-host = socket.gethostname() # Get local machine name
-port = 12345                # Reserve a port for your service.
-s.bind((host, port))        # Bind to the port
+def loop_b():
+    while 1:
+        print("b")
 
-s.listen(5)                 # Now wait for client connection.
-while True:
-   c, addr = s.accept()     # Establish connection with client.
-   print ('Got connection from', addr)
-   c.send('Thank you for connecting')
-   c.close()                # Close the connection
+if __name__ == '__main__':
+    Process(target=loop_a).start()
+    Process(target=loop_b).start()
