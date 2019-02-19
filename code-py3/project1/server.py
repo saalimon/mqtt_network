@@ -2,16 +2,15 @@
 from socket import * 
 import sys
 import json
-
+MCAST_GRP = '224.1.1.1'
 host = 'localhost' 
 MAX_BUF = 2048     
 port = 50000 
 addr = (host, port)  
 s = socket(AF_INET, SOCK_DGRAM,IPPROTO_UDP) 
-s.setsockopt(SOL_SOCKET, SO_REUSEADDR, 1)  
-s.setsockopt(SOL_SOCKET, SO_BROADCAST, 1) 
 s.bind(addr)                
 topic = dict()    
+list_of_sub = list()
 print ('Broker started ...')
 while True:
   txtin,addr = s.recvfrom(MAX_BUF)
@@ -25,9 +24,14 @@ while True:
       topic[data_loaded[1]] = ''        #data_loaded[1] is topic_name
   elif data_loaded[0]=='publish':
     if data_loaded[1] in topic:
-      topic[data_loaded[1]] = data_loaded[2]  #data_loaded[1] is topic_name
+      topic[data_loaded[1]] = data_loaded[2]  #data_loaded[1] is topic_name  
+  data_string = json.dumps(topic)
+  if addr not in list_of_sub:
+    list_of_sub.append(addr)
+    print("OK")
+  for i in list_of_sub:
+    s.sendto(data_string.encode('utf-8'), i)
   print(topic)
-  # data_string = json.dumps(topic)
-  # s.sendto(data_string.encode('utf-8'), addr)
+  # s.sendto("hello".encode('utf-8'), (host,port))
 
 s.close()      
