@@ -3,9 +3,10 @@ from socket import *
 import sys
 import json
 
+host = 'localhost' 
 MAX_BUF = 2048     # Size of buffer to store received bytes
 SERV_PORT = 50000  # Server port number
-addr = ('localhost', SERV_PORT)  # Socket address
+addr = (host, SERV_PORT)  # Socket address
 s = socket(AF_INET, SOCK_DGRAM) # Create UDP socket
 s.bind(addr)                
 topic = dict()    
