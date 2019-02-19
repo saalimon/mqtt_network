@@ -22,13 +22,15 @@ while True:
   if data_loaded[0]=='subscribe':
     if data_loaded[1] not in topic:
       topic[data_loaded[1]] = ''        #data_loaded[1] is topic_name
+      # client_port = json.dumps({'port':addr[1]})
+      # s.sendto(client_port.encode('utf-8'),addr)
   elif data_loaded[0]=='publish':
     if data_loaded[1] in topic:
       topic[data_loaded[1]] = data_loaded[2]  #data_loaded[1] is topic_name  
   data_string = json.dumps(topic)
   if addr not in list_of_sub:
     list_of_sub.append(addr)
-    print("OK")
+    # print("OK")
   for i in list_of_sub:
     s.sendto(data_string.encode('utf-8'), i)
   print(topic)
