@@ -12,14 +12,15 @@ addr = (host,port)
 s = socket(AF_INET, SOCK_DGRAM,IPPROTO_UDP)
 s.settimeout(1)
 topic = dict()
-
 while True:
   try:
-      recvpack, payload = s.recvfrom(1024)
+    recvpack, payload = s.recvfrom(1024)
   except error:
-      recvpack = None
+    recvpack = None
   if recvpack is not None:
-    print(recvpack)
+    t =json.loads(recvpack.decode('utf-8'))
+    for k,v in t.items():
+      topic[k] = v
   txtout = sys.stdin.readline().strip()
   command = txtout.split()
   if len(command) > 1 & len(command) <=3 :
@@ -38,9 +39,11 @@ while True:
   if txtout == 'list':
     print(topic)
   try:
-      recvpack, payload = s.recvfrom(1024)
+    recvpack, payload = s.recvfrom(1024)
   except error:
-      recvpack = None
+    recvpack = None
   if recvpack is not None:
-    print(recvpack)
+    t =json.loads(recvpack.decode('utf-8'))
+    for k,v in t.items():
+      topic[k] = v
 s.close()   
