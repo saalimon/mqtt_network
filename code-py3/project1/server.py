@@ -26,12 +26,12 @@ while True:
   if txtin == b'quit':          
      print('Terminate server ...')
      break
-  if data_loaded[0]=='s':
+  if data_loaded[0]=='sub':
     if data_loaded[1] not in topic:
       topic[data_loaded[1]] = ''        #data_loaded[1] is topic_name
       # client_port = json.dumps({'port':addr[1]})
       # s.sendto(client_port.encode('utf-8'),addr)
-  elif data_loaded[0]=='s':
+  elif data_loaded[0]=='pub':
     if data_loaded[1] in topic:
       topic[data_loaded[1]] = data_loaded[2]  #data_loaded[1] is topic_name  
   data_string = json.dumps(topic)
