@@ -3,7 +3,6 @@ import sys
 from socket import *  
 import json   
 import struct
-import threading,os
 host = 'localhost'  #127.0.0.1
 MAX_BUF = 2048   
 port = 50000 
