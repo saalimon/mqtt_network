@@ -60,5 +60,6 @@ while True:
             for k,v in t.items():
                 if k in topic:
                     topic[k] = v
+            print(topic)
 s.close() 
 os._exit(1) #must have s.close() before 

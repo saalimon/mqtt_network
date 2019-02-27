@@ -35,7 +35,7 @@ while True:
             print("Invalid command")
     addr = (address,port)
     data_string = json.dumps(command).encode('utf-8')
-    s.sendall(data_string)
+    s.send(data_string)
     s.close()
 s.close() 
 os._exit(1) #must have s.close() before 
