@@ -4,13 +4,11 @@ from socket import *
 import json   
 import struct
 import threading,os
-MCAST_PORT = 5007
-MCAST_GRP = '224.1.1.1'
 host = 'localhost'  #127.0.0.1
 MAX_BUF = 2048   
 port = 50000 
 addr = (host,port)
-s = socket(AF_INET, SOCK_DGRAM,IPPROTO_UDP)
+s = socket(AF_INET, SOCK_DGRAM)
 s.bind(('',0))
 topic = dict()
 def recvMsg():

@@ -5,7 +5,7 @@ import json
 import threading,os
 
 MCAST_GRP = '224.1.1.1'
-host = 'localhost' 
+host = '127.0.0.1' 
 MAX_BUF = 2048     
 port = 50000 
 MCAST_PORT = 5007
